@@ -28,7 +28,8 @@ size say_dialogue      40 40
 size button_text       38 38   # answer choices inherit this
 size tutorial_button_text 30 30   # hover tooltips next to status icons
 size history_text      40 40   # Archive
-size journal_text      32 32   # quest description
+size journal_text      34 34   # quest description
+size journal_button_text 34 34   # quest list
 size tooltip_text      38 40
 size input_text        36 36
 size nvl_button_text   35 35   # dialogue answer choices
