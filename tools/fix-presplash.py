@@ -26,7 +26,7 @@ if fg.exists():
 
 cw, ch = int(card.width * SCALE), int(card.height * SCALE)
 out = Image.new("RGBA", (W, H), (0, 0, 0, 255))
-out.alpha_composite(card.resize((cw, ch), Image.NEAREST), ((W - cw) // 2, (H - ch) // 2))
+out.alpha_composite(card.resize((cw, ch), Image.Resampling.NEAREST), ((W - cw) // 2, (H - ch) // 2))
 
 out.convert("RGB").save(bg)
 Image.new("RGBA", (W, H), (0, 0, 0, 0)).save(fg)
