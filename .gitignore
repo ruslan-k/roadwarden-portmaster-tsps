@@ -5,3 +5,6 @@ game/audio/
 payload.bin
 data.zip
 *.squashfs
+*.bak*
+errors.txt
+log.txt

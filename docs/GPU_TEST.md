@@ -1,10 +1,8 @@
 # Roadwarden Ren'Py 8.3.4 — GPU rendering experiment
 
-**Status: experimental / not validated on TrimUI Smart Pro S.**
+**Status: in use — the `gles2` + GL4ES path is what the port ships.**
 
-[Download the complete test patch](./roadwarden-gpu-8.3.4-test.zip).
-
-The archive contains complete replacement files, not a change to the shared PortMaster runtime:
+Everything below lives in this repo; nothing in the shared PortMaster runtime is changed:
 
 - `Roadwarden.sh` — requests `RENPY_RENDERER=gles2`.
 - `game/zz_tsps_port.rpy` — enables `config.gl_enable = True` early in initialization.

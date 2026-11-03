@@ -5,7 +5,7 @@ TrimUI Smart Pro (TSPS, 1280x720, Mali-G57) using the PortMaster Ren'Py runtime
 (`renpy_8.3.4.aarch64.squashfs`).
 
 Status: playable — picture, sound, mouse cursor, gamepad-as-mouse, on-screen
-keyboard. Known limitation: no hardware acceleration (see below).
+keyboard, GL4ES hardware rendering (gles2 renderer).
 
 ## What is in this repo
 
@@ -16,8 +16,10 @@ keyboard. Known limitation: no hardware acceleration (see below).
 | `port.json`, `gameinfo.xml` | PortMaster metadata |
 | `game/zz_tsps_port.rpy` | Port overlay: disables Ren'Py's own joystick handling, draws the cursor (`MouseDisplayable`), adds the on-screen keyboard |
 | `game/gui/port_cursor.png` | Cursor sprite (Ren'Py does not draw one in the software renderer) |
-| `install.sh` | Copies the overlay into an installed game and patches the font sizes |
-| `docs/PERFORMANCE.md` | Measurements, why GL is unavailable, what was tried |
+| `install.sh` | Copies the overlay into an installed game and applies the font-size patches |
+| `gl4es/libGL.so.1`, `gl4es/libEGL.so.1` | GL4ES shim used by the `gles2` renderer |
+| `docs/PERFORMANCE.md` | Frame-time and CPU measurements, what was tried |
+| `docs/GPU_TEST.md` | How to verify the GL path and roll back to software |
 
 Game data is **not** included.
 
@@ -57,8 +59,11 @@ The Ren'Py runtime is mounted by the launcher from PortMaster
 * **Audio**: `SDL_AUDIODRIVER=alsa`, `AUDIODEV=hw:0,0`. Without them SDL picks a
   non-existent default PCM and the game runs silent.
 * **Fonts**: the game is authored at 1920x1080 and displayed at 1280x720, so all
-  text was scaled up 30-40% (`install.sh` applies the patches to `gui.rpy` and
-  `screens.rpy`).
+  text was scaled up (`install.sh` patches `gui.rpy`, `screens.rpy`, `inv.rpy`,
+  `nvlchoices.rpy` and `journal_glossary_endscreen.rpy`). Sizes set by
+  `renpy.register_style_preference()` win at runtime, so each one is changed in
+  both places; a `size` must come after `properties gui.*_text_properties()`,
+  which resets it.
 
 ## Known issues
 
@@ -66,4 +71,3 @@ The Ren'Py runtime is mounted by the launcher from PortMaster
   mouse event through uinput (`mouse_scale = 650`, `mouse_delay = 8` in the
   `.gptk`).
 * No text input from the physical pad beyond the on-screen keyboard.
-* Software rendering — see `docs/PERFORMANCE.md`.
