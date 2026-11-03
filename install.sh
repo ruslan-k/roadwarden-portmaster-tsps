@@ -37,4 +37,6 @@ install -D -m755 "$HERE/Roadwarden.sh" "$GAMEDIR/Roadwarden.sh"
 mkdir -p "$GAMEDIR/gl4es"
 install -m644 "$HERE"/gl4es/libGL.so.1 "$HERE"/gl4es/libEGL.so.1 "$GAMEDIR/gl4es/"
 
+python3 "$HERE/tools/fix-presplash.py" "$GAMEDIR" || echo "presplash fix skipped (needs Pillow)"
+
 echo "installed into $G"

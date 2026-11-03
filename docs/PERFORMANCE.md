@@ -90,3 +90,12 @@ became smooth.
 Caveat: gl4es is a GL→GLES translation layer, so this is hardware accelerated but
 not a native GLES2 path. Shader-heavy effects would still cost more than on a native
 GL driver.
+
+## Presplash (startup logo)
+
+The stock `presplash_background.png` / `presplash_foreground.png` are a 577x299 card.
+Ren'Py blits them 1:1 at the top-left while the engine boots, so the Roadwarden logo
+sat in the corner for the first seconds. `tools/fix-presplash.py` composites both
+layers (1.6x, nearest neighbour) onto a 1280x720 black canvas and replaces the
+foreground with a transparent full-screen image. Run it from `install.sh` or by hand:
+`python3 tools/fix-presplash.py /path/to/roadwarden`.
