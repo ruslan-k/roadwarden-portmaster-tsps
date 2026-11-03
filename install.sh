@@ -24,7 +24,7 @@ size() { # size <style> <normal> <pixel>
 }
 
 size gui_text          40 42
-size say_dialogue      35 35
+size say_dialogue      40 40
 size button_text       38 38   # answer choices inherit this
 size tooltip_text      38 40
 size input_text        36 36
@@ -37,11 +37,17 @@ size navigation_button_text 40 40   # in-game menu list (Return/Save/...)
 grep -q '^    size 40$' "$G/screens.rpy" || \
   sed -i.bak-port '/^    properties gui.button_text_properties("navigation_button")$/a\    size 40' "$G/screens.rpy"
 
+# style blocks that call properties gui.*_text_properties() reset the size
+grep -q '^style say_dialogue:$' "$G/screens.rpy" && \
+  sed -i.bak-port '/^    properties gui.text_properties("dialogue")$/a\    size 40' "$G/screens.rpy"
+
 # same sizes live in the style blocks, applied before the preferences
 sed -i.bak-port -e 's/^    size [0-9]*$/    size 35/' "$G/nvlchoices.rpy"
 
-# inventory tutorial hint: 28 -> 30, frame grows so an extra line fits
+# inventory: hint text 30, item tooltip 30, taller hint frame
 sed -i.bak-port -e 's/text_size 28/text_size 30/g' \
+  -e 's/tt.value xpos 10 size 28/tt.value xpos 10 size 30/' \
+  -e 's/tt.value xpos 12 size 28/tt.value xpos 12 size 30/' \
   -e 's/(1380,130)/(1380,180)/g' "$G/inv.rpy"
 
 # Ren'Py recompiles .rpy only when the .rpyc is missing
