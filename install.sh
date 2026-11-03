@@ -49,6 +49,18 @@ grep -q '^style say_dialogue:$' "$G/screens.rpy" && \
 sed -i.bak-port -e 's/^    size [0-9]*$/    size 35/' "$G/nvlchoices.rpy"
 
 # inventory: hint text 30, item tooltip 30, taller hint frame
+# drop the old size line, then re-add it after button_text_properties()
+python3 - "$G/journal_glossary_endscreen.rpy" <<'PY'
+import sys
+f = sys.argv[1]
+lines = open(f, encoding="utf-8", newline="").readlines()
+k = next(n for n, l in enumerate(lines) if l.startswith("style journal_button_text is button_text:"))
+e = next(n for n in range(k + 1, len(lines)) if lines[n].startswith("style "))
+blk = [l for l in lines[k + 1:e] if not l.strip().startswith("size ")]
+blk.append("    size 34\r\n")
+lines[k + 1:e] = blk
+open(f, "w", encoding="utf-8", newline="").writelines(lines)
+PY
 sed -i.bak-port -e 's/text_size 28/text_size 30/g' \
   -e 's/tt.value xpos 10 size 28/tt.value xpos 10 size 30/' \
   -e 's/tt.value xpos 12 size 28/tt.value xpos 12 size 30/' \
