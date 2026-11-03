@@ -24,15 +24,15 @@ size() { # size <style> <normal> <pixel>
 }
 
 size gui_text          40 42
-size say_dialogue      40 42
+size say_dialogue      35 35
 size button_text       38 38   # answer choices inherit this
 size tooltip_text      38 40
 size input_text        36 36
-size nvl_button_text   37 37   # dialogue answer choices
-size nvl_button2_text  37 37   # answers you cannot pick
+size nvl_button_text   35 35   # dialogue answer choices
+size nvl_button2_text  35 35   # answers you cannot pick
 
 # same sizes live in the style blocks, applied before the preferences
-sed -i.bak-port -e 's/^    size 28$/    size 37/' "$G/nvlchoices.rpy"
+sed -i.bak-port -e 's/^    size [0-9]*$/    size 35/' "$G/nvlchoices.rpy"
 
 # Ren'Py recompiles .rpy only when the .rpyc is missing
 rm -f "$G/screens.rpyc" "$G/gui.rpyc" "$G/zz_tsps_port.rpyc" "$G/nvlchoices.rpyc"
