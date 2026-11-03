@@ -40,8 +40,12 @@ grep -q '^    size 34$' "$G/screens.rpy" || \
 # same sizes live in the style blocks, applied before the preferences
 sed -i.bak-port -e 's/^    size [0-9]*$/    size 35/' "$G/nvlchoices.rpy"
 
+# inventory tutorial hint: 28 -> 36, frame grows so the extra line fits
+sed -i.bak-port -e 's/text_size 28/text_size 36/g' \
+  -e 's/(1380,130)/(1380,180)/g' "$G/inv.rpy"
+
 # Ren'Py recompiles .rpy only when the .rpyc is missing
-rm -f "$G/screens.rpyc" "$G/gui.rpyc" "$G/zz_tsps_port.rpyc" "$G/nvlchoices.rpyc"
+rm -f "$G/screens.rpyc" "$G/gui.rpyc" "$G/zz_tsps_port.rpyc" "$G/nvlchoices.rpyc" "$G/inv.rpyc"
 
 # GPU path: gles2 renderer through gl4es, plus the launcher that wires it up
 install -D -m755 "$HERE/Roadwarden.sh" "$GAMEDIR/Roadwarden.sh"
