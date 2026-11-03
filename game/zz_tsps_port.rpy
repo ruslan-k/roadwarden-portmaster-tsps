@@ -37,3 +37,11 @@ screen osk():
                     textbutton "Space" action Function(osk_text, " ") text_size 26
                     textbutton "Del" action Function(osk_key, "input_backspace") text_size 26
                     textbutton "OK" action Function(osk_key, "input_enter") text_size 26
+
+# PortMaster ships renpy/config.py with gl_enable = False and without mipmap.
+# Import by string so the store keeps its renpy proxy (renpy.has_screen etc.).
+init -1000 python:
+    _rc = __import__("renpy").config
+    _rc.gl_enable = True
+    _rc.mipmap = False
+    del _rc

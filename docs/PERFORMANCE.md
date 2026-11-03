@@ -48,3 +48,45 @@ aarch64 plus an EGL context over the Mali driver.
    with NN makes the pixel art uneven.
 3. **Throttle redraws**: Ren'Py has no fps cap; the software renderer redraws on
    every event/ATL tick. Throwing away redraws is not exposed by the runtime.
+
+## Resolved: GL2 (gles2) acceleration via gl4es
+
+The PortMaster runtime ships `renpy/config.py` with `gl_enable = False`, so GL2 aborts
+with `GL Disabled.` even though `renpy.gl2.gl2draw` is compiled into `librenpython.so`.
+Re-enabling it needs three things, all in this repo:
+
+1. `game/zz_tsps_port.rpy` — `init -1000` sets `renpy.config.gl_enable = True` and
+   `renpy.config.mipmap = False` (the runtime has no `mipmap` config; without it
+   `gl2texture.allocate_texture` raises `AttributeError`).
+   It must reach the module through `__import__("renpy").config`: assigning through the
+   store proxy `config.*` raises `not a known configuration variable`, and a plain
+   `import renpy` in an init block shadows the store's `renpy` proxy (breaks
+   `renpy.has_screen`, `renpy.get_side_image`).
+2. `Roadwarden.sh` — `RENPY_RENDERER=gles2`, `LD_LIBRARY_PATH` with `gl4es/`,
+   `SDL_VIDEO_GL_DRIVER` / `SDL_VIDEO_EGL_DRIVER` pointing at the bundled libs,
+   `LIBGL_ES=2`, `LIBGL_GL=21`.
+3. `gl4es/libGL.so.1` + `libEGL.so.1` (ARM64, from DDLC-ARM-Linux, MIT) in the port dir.
+
+Verified on TrimUI Smart Pro S (Mali-G57, glibc 2.31, SpruceOS):
+
+```
+Initializing gles2 renderer:
+Vendor: "b'ptitSeb'"
+Renderer: b'GL4ES wrapper'
+Version: b'2.1 gl4es wrapper 1.1.7'
+Screen sizes: virtual=(1920, 1080) physical=(1280, 720) drawable=(1280, 720)
+Maximum texture size: 4096x4096
+```
+
+No `GL Disabled.`, no fallback to `Initializing sw renderer`, no pageflip errors;
+the intro and scene transitions run smoothly. Rolling back is one line:
+`RENPY_RENDERER=sw` in the launcher (or restore `Roadwarden.sh.bak-sw`).
+
+Note on CPU: the software path measured ~68% of one core on a static scene; the GL
+path measures ~79% because it now draws at vsync rate instead of dropping frames.
+Whole-second CPU is therefore not the metric — frame pacing is, and that is what
+became smooth.
+
+Caveat: gl4es is a GL→GLES translation layer, so this is hardware accelerated but
+not a native GLES2 path. Shader-heavy effects would still cost more than on a native
+GL driver.

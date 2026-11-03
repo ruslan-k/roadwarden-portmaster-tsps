@@ -75,6 +75,12 @@ $ESUDO mount --bind "$gamefiles" "$renpydir/game"
 export SDL_GAMECONTROLLERCONFIG="$sdl_controllerconfig"
 export LD_LIBRARY_PATH="$GAMEDIR/libs:$LD_LIBRARY_PATH"
 export PYTHONHOME=$GAMEDIR/renpy/
+export LD_LIBRARY_PATH="$GAMEDIR/gl4es:$LD_LIBRARY_PATH"
+export SDL_VIDEO_GL_DRIVER="$GAMEDIR/gl4es/libGL.so.1"
+export SDL_VIDEO_EGL_DRIVER="$GAMEDIR/gl4es/libEGL.so.1"
+export RENPY_RENDERER=gles2
+export LIBGL_ES=2
+export LIBGL_GL=21
 export SDL_AUDIODRIVER=alsa
 export AUDIODEV=hw:0,0
 export RENPY_LOG_BASE="$GAMEDIR/conf"

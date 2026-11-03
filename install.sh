@@ -30,6 +30,11 @@ size tooltip_text      38 40
 size input_text        36 36
 
 # Ren'Py recompiles .rpy only when the .rpyc is missing
-rm -f "$G/screens.rpyc" "$G/gui.rpyc"
+rm -f "$G/screens.rpyc" "$G/gui.rpyc" "$G/zz_tsps_port.rpyc"
+
+# GPU path: gles2 renderer through gl4es, plus the launcher that wires it up
+install -D -m755 "$HERE/Roadwarden.sh" "$GAMEDIR/Roadwarden.sh"
+mkdir -p "$GAMEDIR/gl4es"
+install -m644 "$HERE"/gl4es/libGL.so.1 "$HERE"/gl4es/libEGL.so.1 "$GAMEDIR/gl4es/"
 
 echo "installed into $G"
