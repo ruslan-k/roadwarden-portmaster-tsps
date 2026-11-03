@@ -27,7 +27,7 @@ size gui_text          40 42
 size say_dialogue      40 40
 size button_text       38 38   # answer choices inherit this
 size tutorial_button_text 30 30   # hover tooltips next to status icons
-size history_text      36 36   # Archive
+size history_text      40 40   # Archive
 size tooltip_text      38 40
 size input_text        36 36
 size nvl_button_text   35 35   # dialogue answer choices
