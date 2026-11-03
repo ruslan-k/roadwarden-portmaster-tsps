@@ -30,6 +30,7 @@ size tooltip_text      38 40
 size input_text        36 36
 size nvl_button_text   35 35   # dialogue answer choices
 size nvl_button2_text  35 35   # answers you cannot pick
+size navigation_button_text 60 60   # in-game menu list (Return/Save/...)
 
 # same sizes live in the style blocks, applied before the preferences
 sed -i.bak-port -e 's/^    size [0-9]*$/    size 35/' "$G/nvlchoices.rpy"
