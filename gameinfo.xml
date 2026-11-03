@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gameList>
+    <game>
+        <path>./Roadwarden.sh</path>
+        <name>Roadwarden</name>
+        <desc>Текстовая RPG о страннике, охраняющем торговые пути на диком полуострове: карта, переговоры, торговля, бои и решения, которые меняют мир.</desc>
+        <rating>0.85</rating>
+        <releasedate>20220908T000000</releasedate>
+        <developer>Moral Anxiety Studio</developer>
+        <publisher>Assemble Entertainment</publisher>
+        <genre>RPG</genre>
+        <players>1</players>
+        <image>./screenshot.png</image>
+    </game>
+</gameList>

@@ -1,0 +1,7 @@
+*.rpyc
+*.rpymc
+game/images/
+game/audio/
+payload.bin
+data.zip
+*.squashfs

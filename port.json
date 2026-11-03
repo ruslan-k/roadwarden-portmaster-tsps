@@ -1,0 +1,43 @@
+{
+    "version": 4,
+    "name": "roadwarden.zip",
+    "items": [
+        "Roadwarden.sh",
+        "roadwarden"
+    ],
+    "items_opt": null,
+    "attr": {
+        "title": "Roadwarden",
+        "porter": [
+            "ruslan"
+        ],
+        "desc": "Roadwarden — текстовая ролевая игра в декорациях сурового фэнтези. Вы одинокий странник, охраняющий торговые пути на диком полуострове: исследуйте карту, ведите переговоры, торгуйте, сражайтесь и решайте, кому здесь доверять. Каждый выбор меняет мир, время ограничено, а выживание зависит от запасов, репутации и заметок в дневнике.",
+        "desc_md": null,
+        "inst": "Copy the GOG Linux game files (data/noarch/game/game) into ports/roadwarden/game",
+        "inst_md": null,
+        "genres": [
+            "rpg",
+            "text adventure"
+        ],
+        "image": {},
+        "rtr": false,
+        "exp": false,
+        "runtime": [],
+        "store": [
+            {
+                "name": "GOG",
+                "url": "https://www.gog.com/game/roadwarden"
+            },
+            {
+                "name": "Steam",
+                "url": "https://store.steampowered.com/app/1155970"
+            }
+        ],
+        "free": false,
+        "reqs": [],
+        "arch": [
+            "aarch64"
+        ],
+        "min_glibc": ""
+    }
+}

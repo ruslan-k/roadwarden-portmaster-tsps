@@ -1,0 +1,41 @@
+# Roadwarden - TSPS controls, mouse-first
+# Right stick = mouse. A / R2 = left click. B / L2 = right click.
+# Start = enter, Select = esc. D-pad = arrows.
+back = esc
+start = enter
+a = mouse_left
+b = mouse_right
+x = ""
+y = ""
+
+l1 = pageup
+l2 = mouse_right
+l3 = ""
+
+r1 = pagedown
+r2 = mouse_left
+r3 = ""
+
+up = up
+down = down
+left = left
+right = right
+
+# Mouse on right analog - per gptokeyb docs only ONE line needed
+right_analog_up = mouse_movement_up
+
+# Left analog = arrows
+left_analog_up = up
+left_analog_down = down
+left_analog_left = left
+left_analog_right = right
+
+# New deadzone code (overrides old deadzone_x/y)
+deadzone_mode = scaled_radial
+deadzone = 2000
+deadzone_scale = 8
+deadzone_delay = 16
+
+# Mouse speed: smaller = faster. 512 default, 350 snappier on TSPS stick.
+mouse_scale = 650
+mouse_delay = 8
